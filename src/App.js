@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Converter from "./components/Converter.js";
+import Output from "./components/Output.js";
+import { useState } from "react";
 
-function App() {
+const App = () => {
+  const [data, setData] = useState({ items: ["this"] });
+
+  const callback = (item) => {
+    const currentItems = data["items"];
+    currentItems.push(item);
+    setData({ items: currentItems });
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Converter callback={callback} />
+      <Output outputItems={data["items"]} />
     </div>
   );
-}
+};
 
 export default App;
