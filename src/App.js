@@ -4,17 +4,15 @@ import Output from "./components/Output.js";
 import { useState } from "react";
 
 const App = () => {
-  const [data, setData] = useState({ items: ["this"] });
+  const [data, setData] = useState(0);
 
-  const callback = (item) => {
-    const currentItems = data["items"];
-    currentItems.push(item);
-    setData({ items: currentItems });
+  const callback = (output) => {
+    setData(output);
   };
   return (
     <div>
       <Converter callback={callback} />
-      <Output outputItems={data["items"]} />
+      <Output outputValue={data} />
     </div>
   );
 };

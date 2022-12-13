@@ -3,13 +3,7 @@ const Output = (props) => {
     return <p>{item}</p>;
   };
 
-  return (
-    <div>
-      {props.outputItems.length > 0
-        ? props.outputItems.map((item) => showItem(item))
-        : "Nothing"}
-    </div>
-  );
+  return <div>{props.outputValue}</div>;
 };
 
 export default Output;

@@ -2,29 +2,28 @@ import { useState } from "react";
 
 const Converter = (props) => {
   const [inputValue, setInputValue] = useState("");
-  const [outputValue, setOutputValue] = useState("");
+  const [outputValue, setOutputValue] = useState(0);
 
   const updateInputValue = (e) => {
     setInputValue(e.target.value);
   };
 
-  const buttonClicked = () => {
+  const buttonClicked = (e) => {
+    e.preventDefault();
     convertDecToHex(inputValue);
   };
 
   const convertDecToHex = (decimalValue) => {
     const hexValue = parseInt(decimalValue) + 100;
+    props.callback(hexValue);
     setOutputValue(hexValue);
-    props.callback(outputValue);
   };
 
   return (
     <form>
       <label htmlFor="inputValue">Enter value: </label>
       <input type="text" name="inputValue" onChange={updateInputValue}></input>
-      <button onClick={buttonClicked} type="button">
-        Do it
-      </button>
+      <button onClick={buttonClicked}>Do it</button>
     </form>
   );
 };
