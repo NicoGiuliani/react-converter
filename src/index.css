@@ -14,10 +14,11 @@ code {
 
 #root {
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   color: #fff;
+  overflow: hidden;
 }
 
 body {
@@ -26,4 +27,16 @@ body {
   width: 100vw;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+@media screen and (min-device-width: 780px) {
+  .smallScreen {
+    display: none !important;
+  }
+}
+
+@media screen and (max-device-width: 780px) {
+  .bigScreen {
+    display: none !important;
+  }
 }
