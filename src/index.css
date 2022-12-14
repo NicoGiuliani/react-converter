@@ -13,7 +13,16 @@ code {
 }
 
 #root {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+}
+
+#overlay {
   background-image: url("/public/juniper_dunes.jpg");
+  height: 100vh;
+  width: 100vw;
   background-repeat: no-repeat;
   background-size: cover;
 }
