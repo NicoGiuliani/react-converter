@@ -2,7 +2,6 @@ import { useState } from "react";
 
 const Converter = (props) => {
   const [inputValue, setInputValue] = useState("");
-  const [outputValue, setOutputValue] = useState(0);
 
   const updateInputValue = (e) => {
     setInputValue(e.target.value);
@@ -16,15 +15,29 @@ const Converter = (props) => {
   const convertDecToHex = (decimalValue) => {
     const hexValue = parseInt(decimalValue) + 100;
     props.callback(hexValue);
-    setOutputValue(hexValue);
   };
 
   return (
-    <form>
-      <label htmlFor="inputValue">Enter value: </label>
-      <input type="text" name="inputValue" onChange={updateInputValue}></input>
-      <button onClick={buttonClicked}>Do it</button>
-    </form>
+    <div className="container">
+      <div className="row">
+        <div className="col-3" />
+        <div className="col-9">
+          <form>
+            <div className="col-3" />
+            <label htmlFor="inputValue">Enter value: </label>
+            <input
+              type="text"
+              name="inputValue"
+              onChange={updateInputValue}
+              className="col-4"
+            ></input>
+            <button onClick={buttonClicked} className="col-2">
+              Do it
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 
