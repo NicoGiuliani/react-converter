@@ -12,13 +12,32 @@ const Converter = (props) => {
     convertDecToHex(inputValue);
   };
 
-  const convertDecToHex = (decimalValue) => {
-    const hexValue = parseInt(decimalValue) + 100;
-    props.callback(hexValue);
+  const convertDecToHex = (decimalValueString) => {
+    let decimalValue = parseInt(decimalValueString);
+
+    let bitIndices = [];
+    while (decimalValue > 0) {
+      const highestIndex = Math.floor(Math.log(decimalValue) / Math.log(2));
+      // console.log(highestIndex);
+      decimalValue -= Math.pow(2, highestIndex);
+      // console.log(decimalValue);
+      bitIndices.push(highestIndex);
+      console.log("---------------------");
+    }
+    console.log(bitIndices);
+    const reversedBits =
+      bitIndices.length > 0 ? Array(bitIndices[0] + 1).fill(0) : [0];
+
+    bitIndices.forEach((index) => (reversedBits[index] = 1));
+    console.log(reversedBits);
+    const bits = reversedBits.reverse().join("");
+    console.log(bits);
+
+    props.callback(bits);
   };
 
   return (
-    <div className="wrapper">
+    <>
       <div className="row mb-3 bigScreen">
         <div className="col-2">
           <label className="form-label pt-1" htmlFor="inputValue">
@@ -60,7 +79,7 @@ const Converter = (props) => {
           <strong>Convert</strong>
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
