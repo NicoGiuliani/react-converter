@@ -20,11 +20,11 @@ const Converter = (props) => {
   return (
     <div className="row mb-5">
       <div className="col-2">
-        <label className="form-label" htmlFor="inputValue">
+        <label className="form-label pt-1" htmlFor="inputValue">
           <strong>Enter decimal value:</strong>
         </label>
       </div>
-      <div className="col-7">
+      <div className="col-8">
         <input
           className="form-control text-center"
           type="text"
@@ -32,11 +32,8 @@ const Converter = (props) => {
           onChange={updateInputValue}
         />
       </div>
-      <div className="col-3">
-        <button
-          className="btn btn-outline-warning px-5 py-2"
-          onClick={buttonClicked}
-        >
+      <div className="col-2">
+        <button className="btn btn-primary px-3 py-2" onClick={buttonClicked}>
           <strong>Convert</strong>
         </button>
       </div>

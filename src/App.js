@@ -15,8 +15,8 @@ const App = () => {
         <div className="row">
           <div className="col-12 text-center">
             <Converter callback={callback} />
+            <Output outputValue={data} />
           </div>
-          <Output outputValue={data} />
         </div>
       </div>
     </div>
