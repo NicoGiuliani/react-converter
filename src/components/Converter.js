@@ -18,26 +18,18 @@ const Converter = (props) => {
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-3" />
-        <div className="col-9">
-          <form>
-            <div className="col-3" />
-            <label htmlFor="inputValue">Enter value: </label>
-            <input
-              type="text"
-              name="inputValue"
-              onChange={updateInputValue}
-              className="col-4"
-            ></input>
-            <button onClick={buttonClicked} className="col-2">
-              Do it
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <form>
+      <label className="me-2" htmlFor="inputValue">
+        Enter value:
+      </label>
+      <input
+        className="me-2 mb-5"
+        type="text"
+        name="inputValue"
+        onChange={updateInputValue}
+      />
+      <button onClick={buttonClicked}>Do it</button>
+    </form>
   );
 };
 
