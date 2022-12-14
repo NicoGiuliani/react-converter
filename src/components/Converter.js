@@ -23,7 +23,7 @@ const Converter = (props) => {
         Enter value:
       </label>
       <input
-        className="me-2 mb-5"
+        className="me-2 mb-4"
         type="text"
         name="inputValue"
         onChange={updateInputValue}

@@ -10,12 +10,15 @@ const App = () => {
     setData(output);
   };
   return (
-    <div className="container">
-      <div className="d-flex flex-row justify-content-center align-items-center mt-5">
-        <Converter callback={callback} />
+    <div className="d-flex align-items-center min-vh-100">
+      <div className="container">
+        <div className="row">
+          <div className="col-12 text-center">
+            <Converter callback={callback} />
+          </div>
+          <Output outputValue={data} />
+        </div>
       </div>
-      <div className="d-flex flex-row justify-content-center align-items-center"></div>
-      <Output outputValue={data} />
     </div>
   );
 };

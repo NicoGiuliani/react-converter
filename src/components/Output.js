@@ -1,6 +1,6 @@
 const Output = (props) => {
   return (
-    <div className="card text-white bg-secondary">
+    <div className="card text-white bg-secondary text-center">
       <div className="card-header">
         <strong>Binary Output</strong>
       </div>
