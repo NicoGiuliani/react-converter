@@ -4,7 +4,7 @@ import Output from "./components/Output.js";
 import { useState } from "react";
 
 const App = () => {
-  const [data, setData] = useState(0);
+  const [data, setData] = useState();
 
   const callback = (output) => {
     setData(output);

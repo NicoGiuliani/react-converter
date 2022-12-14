@@ -1,38 +1,43 @@
 import { useState } from "react";
 
 const Converter = (props) => {
-  const [inputValue, setInputValue] = useState("");
+  let currentInput;
+  const [inputValue, setInputValue] = useState(0);
 
   const updateInputValue = (e) => {
-    setInputValue(e.target.value);
+    currentInput = e.target.value;
   };
 
   const buttonClicked = (e) => {
     e.preventDefault();
-    convertDecToHex(inputValue);
+    let result = parseInt(currentInput);
+    if (isNaN(result) || result < 0) {
+      alert("Input value must be a positive integer.");
+      result = 0;
+    }
+
+    convertDecToHex(result);
   };
 
-  const convertDecToHex = (decimalValueString) => {
-    let decimalValue = parseInt(decimalValueString);
-
+  const convertDecToHex = (decimalValue) => {
     let bitIndices = [];
     while (decimalValue > 0) {
-      const highestIndex = Math.floor(Math.log(decimalValue) / Math.log(2));
-      // console.log(highestIndex);
+      let highestIndex = Math.floor(Math.log(decimalValue) / Math.log(2));
       decimalValue -= Math.pow(2, highestIndex);
-      // console.log(decimalValue);
       bitIndices.push(highestIndex);
-      console.log("---------------------");
     }
-    console.log(bitIndices);
     const reversedBits =
       bitIndices.length > 0 ? Array(bitIndices[0] + 1).fill(0) : [0];
 
     bitIndices.forEach((index) => (reversedBits[index] = 1));
-    console.log(reversedBits);
-    const bits = reversedBits.reverse().join("");
-    console.log(bits);
-
+    let bitStream = Array(reversedBits.length);
+    for (let i = 0; i < reversedBits.length; i++) {
+      if (i % 4 === 0 && i !== 0) {
+        bitStream.push(" ");
+      }
+      bitStream.push(reversedBits[i]);
+    }
+    const bits = bitStream.reverse();
     props.callback(bits);
   };
 
@@ -50,6 +55,7 @@ const Converter = (props) => {
             type="text"
             name="inputValue"
             onChange={updateInputValue}
+            placeholder={inputValue}
           />
         </div>
         <div className="col-2">
@@ -71,6 +77,7 @@ const Converter = (props) => {
           type="text"
           name="inputValue"
           onChange={updateInputValue}
+          placeholder={inputValue}
         />
         <button
           className="btn btn-outline-warning px-3 py-2"
