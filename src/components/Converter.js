@@ -14,6 +14,9 @@ const Converter = (props) => {
     if (isNaN(result) || result < 0) {
       alert("Input value must be a positive integer.");
       result = 0;
+    } else if (result > 2 ** 53 - 1) {
+      alert("Too large of an input provided.");
+      result = 0;
     }
 
     convertDecToHex(result);
@@ -25,6 +28,8 @@ const Converter = (props) => {
       let highestIndex = Math.floor(Math.log(decimalValue) / Math.log(2));
       decimalValue -= Math.pow(2, highestIndex);
       bitIndices.push(highestIndex);
+      console.log("bitIndices: " + bitIndices);
+      console.log("decimalValue: " + decimalValue);
     }
     const reversedBits =
       bitIndices.length > 0 ? Array(bitIndices[0] + 1).fill(0) : [0];
