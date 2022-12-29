@@ -1,51 +1,72 @@
 import { useState } from "react";
 
 const Converter = (props) => {
-  let currentInput;
   const [mode, setMode] = useState("decToBin");
-  // const [inputValue, setInputValue] = useState(0);
+  const [inputValue, setInputValue] = useState(0);
 
   const updateInputValue = (e) => {
-    currentInput = e.target.value;
+    const currentInput = e.target.value;
+    setInputValue(currentInput);
   };
 
-  const buttonClicked = (e) => {
-    e.preventDefault();
-    let result = parseInt(currentInput);
-    if (isNaN(result) || result < 0) {
+  const convert = () => {
+    let currentValue = 0;
+
+    let regex = /[\D]/g;
+    if (regex.test(inputValue)) {
       alert("Input value must be a positive integer.");
-      result = 0;
-    } else if (result > 2 ** 53 - 1) {
-      alert("Too large of an input provided.");
-      result = 0;
-    }
-
-    convertDecToBin(result);
-  };
-
-  const convertDecToBin = (decimalValue) => {
-    let bitIndices = [];
-    let highestIndex;
-    while (decimalValue > 0) {
-      highestIndex = Math.floor(Math.log(decimalValue) / Math.log(2));
-      decimalValue -= Math.pow(2, highestIndex);
-      bitIndices.push(highestIndex);
-      // console.log("bitIndices: " + bitIndices);
-      // console.log("decimalValue: " + decimalValue);
-    }
-    const reversedBits =
-      bitIndices.length > 0 ? Array(bitIndices[0] + 1).fill(0) : [0];
-
-    bitIndices.forEach((index) => (reversedBits[index] = 1));
-    let bitStream = Array(reversedBits.length);
-    for (let i = 0; i < reversedBits.length; i++) {
-      if (i % 4 === 0 && i !== 0) {
-        bitStream.push(" ");
+    } else {
+      currentValue = parseInt(inputValue);
+      if (inputValue > 2 ** 53 - 1) {
+        alert("Too large of an input provided.");
+        currentValue = 0;
       }
-      bitStream.push(reversedBits[i]);
     }
-    const bits = bitStream.reverse();
-    props.callback(bits);
+
+    switch (mode) {
+      case "decToBin":
+        let decimalValue = currentValue;
+        let bitIndices = [];
+        let highestIndex;
+        while (decimalValue > 0) {
+          highestIndex = Math.floor(Math.log(decimalValue) / Math.log(2));
+          decimalValue -= Math.pow(2, highestIndex);
+          bitIndices.push(highestIndex);
+        }
+        const reversedBits =
+          bitIndices.length > 0 ? Array(bitIndices[0] + 1).fill(0) : [0];
+
+        bitIndices.forEach((index) => (reversedBits[index] = 1));
+        let bitStream = Array(reversedBits.length);
+        for (let i = 0; i < reversedBits.length; i++) {
+          if (i % 4 === 0 && i !== 0) {
+            bitStream.push(" ");
+          }
+          bitStream.push(reversedBits[i]);
+        }
+        const bits = bitStream.reverse();
+        props.callback(bits);
+        break;
+      case "binToDec":
+        const binaryValue = currentValue;
+        const binaryString = binaryValue.toString();
+        const regex = /[^01]/g;
+        if (regex.test(binaryString)) {
+          alert("Invalid digit present in binary");
+        } else {
+          let decimalValue = 0;
+          const reversedBinaryDigits = binaryString.split("").reverse();
+          for (let i = 0; i < reversedBinaryDigits.length; i++) {
+            if (reversedBinaryDigits[i] === "1") {
+              decimalValue += Math.pow(2, i);
+            }
+          }
+          props.callback(decimalValue);
+        }
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -94,7 +115,7 @@ const Converter = (props) => {
         <div className="col-2">
           <button
             className="btn btn-outline-warning py-2"
-            onClick={buttonClicked}
+            onClick={convert}
             style={{ width: "100%" }}
           >
             <strong>Convert</strong>
