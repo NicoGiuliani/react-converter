@@ -9,43 +9,52 @@ const Converter = (props) => {
     setInputValue(currentInput);
   };
 
-  const convert = () => {
-    let currentValue = 0;
-
+  const validateInputValue = () => {
+    let value;
     let regex = /[\D]/g;
     if (regex.test(inputValue)) {
       alert("Input value must be a positive integer.");
     } else {
-      currentValue = parseInt(inputValue);
+      value = parseInt(inputValue);
       if (inputValue > 2 ** 53 - 1) {
         alert("Too large of an input provided.");
-        currentValue = 0;
+        value = 0;
       }
     }
+    return value;
+  };
+
+  const convert = () => {
+    let currentValue = validateInputValue();
 
     switch (mode) {
       case "decToBin":
         let decimalValue = currentValue;
-        let bitIndices = [];
+        let binaryOneIndices = [];
         let highestIndex;
+
         while (decimalValue > 0) {
           highestIndex = Math.floor(Math.log(decimalValue) / Math.log(2));
           decimalValue -= Math.pow(2, highestIndex);
-          bitIndices.push(highestIndex);
+          binaryOneIndices.push(highestIndex);
         }
-        const reversedBits =
-          bitIndices.length > 0 ? Array(bitIndices[0] + 1).fill(0) : [0];
+        const binaryDigitArray =
+          binaryOneIndices.length > 0
+            ? Array(binaryOneIndices[0] + 1).fill(0)
+            : [0];
 
-        bitIndices.forEach((index) => (reversedBits[index] = 1));
-        let bitStream = Array(reversedBits.length);
-        for (let i = 0; i < reversedBits.length; i++) {
+        binaryOneIndices.forEach((index) => (binaryDigitArray[index] = 1));
+
+        let binaryOutputArray = Array(binaryDigitArray.length);
+        for (let i = 0; i < binaryDigitArray.length; i++) {
           if (i % 4 === 0 && i !== 0) {
-            bitStream.push(" ");
+            binaryOutputArray.push(" ");
           }
-          bitStream.push(reversedBits[i]);
+          binaryOutputArray.push(binaryDigitArray[i]);
         }
-        const bits = bitStream.reverse();
-        props.callback(bits);
+
+        const binaryOutput = binaryOutputArray.reverse().join("");
+        props.callback(binaryOutput);
         break;
       case "binToDec":
         const binaryValue = currentValue;
