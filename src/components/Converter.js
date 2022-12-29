@@ -2,7 +2,8 @@ import { useState } from "react";
 
 const Converter = (props) => {
   let currentInput;
-  const [inputValue, setInputValue] = useState(0);
+  const [mode, setMode] = useState("decToBin");
+  // const [inputValue, setInputValue] = useState(0);
 
   const updateInputValue = (e) => {
     currentInput = e.target.value;
@@ -19,17 +20,18 @@ const Converter = (props) => {
       result = 0;
     }
 
-    convertDecToHex(result);
+    convertDecToBin(result);
   };
 
-  const convertDecToHex = (decimalValue) => {
+  const convertDecToBin = (decimalValue) => {
     let bitIndices = [];
+    let highestIndex;
     while (decimalValue > 0) {
-      let highestIndex = Math.floor(Math.log(decimalValue) / Math.log(2));
+      highestIndex = Math.floor(Math.log(decimalValue) / Math.log(2));
       decimalValue -= Math.pow(2, highestIndex);
       bitIndices.push(highestIndex);
-      console.log("bitIndices: " + bitIndices);
-      console.log("decimalValue: " + decimalValue);
+      // console.log("bitIndices: " + bitIndices);
+      // console.log("decimalValue: " + decimalValue);
     }
     const reversedBits =
       bitIndices.length > 0 ? Array(bitIndices[0] + 1).fill(0) : [0];
@@ -49,31 +51,58 @@ const Converter = (props) => {
   return (
     <>
       <div className="row mb-3 bigScreen">
-        <div className="col-2">
-          <label className="form-label pt-1" htmlFor="inputValue">
-            <strong>Enter decimal value:</strong>
-          </label>
+        <div className="col-3">
+          <div
+            class="btn-group"
+            role="group"
+            aria-label="Basic radio toggle button group"
+            style={{ width: "100%" }}
+          >
+            <input
+              type="radio"
+              class="btn-check"
+              name="btnradio"
+              id="btnradio1"
+              autocomplete="off"
+              checked={mode === "decToBin"}
+            />
+            <label class="btn btn-outline-success" for="btnradio1">
+              Decimal to Binary
+            </label>
+            <input
+              type="radio"
+              class="btn-check"
+              name="btnradio"
+              id="btnradio2"
+              autocomplete="off"
+              checked={mode === "binToDec"}
+            />
+            <label class="btn btn-outline-success" for="btnradio2">
+              Binary to Decimal
+            </label>
+          </div>
         </div>
-        <div className="col-8">
+        <div className="col-7">
           <input
             className="form-control text-center"
             type="text"
             name="inputValue"
             onChange={updateInputValue}
-            placeholder={inputValue}
+            placeholder={"0"}
           />
         </div>
         <div className="col-2">
           <button
-            className="btn btn-outline-warning px-3 py-2"
+            className="btn btn-outline-warning py-2"
             onClick={buttonClicked}
+            style={{ width: "100%" }}
           >
             <strong>Convert</strong>
           </button>
         </div>
       </div>
 
-      <div className="row mb-3 smallScreen mx-auto">
+      {/* <div className="row mb-3 smallScreen mx-auto">
         <label className="form-label pt-1" htmlFor="inputValue">
           <strong>Enter decimal value:</strong>
         </label>
@@ -82,7 +111,7 @@ const Converter = (props) => {
           type="text"
           name="inputValue"
           onChange={updateInputValue}
-          placeholder={inputValue}
+          // placeholder={0}
         />
         <button
           className="btn btn-outline-warning px-3 py-2"
@@ -90,7 +119,7 @@ const Converter = (props) => {
         >
           <strong>Convert</strong>
         </button>
-      </div>
+      </div> */}
     </>
   );
 };
