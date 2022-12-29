@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, React } from "react";
 
 const Converter = (props) => {
   const [mode, setMode] = useState("decToBin");
-  const [inputValue, setInputValue] = useState(0);
+  const [inputValue, setInputValue] = useState("");
 
   const updateInputValue = (e) => {
     const currentInput = e.target.value;
     setInputValue(currentInput);
+  };
+
+  const changeMode = (mode) => {
+    setInputValue("");
+    setMode(mode);
   };
 
   const validateInputValue = () => {
@@ -94,7 +99,7 @@ const Converter = (props) => {
               name="btnradio"
               id="btnradio1"
               checked={mode === "decToBin"}
-              onChange={() => setMode("decToBin")}
+              onChange={() => changeMode("decToBin")}
             />
             <label className="btn btn-outline-success" htmlFor="btnradio1">
               Decimal to Binary
@@ -105,23 +110,25 @@ const Converter = (props) => {
               name="btnradio"
               id="btnradio2"
               checked={mode === "binToDec"}
-              onChange={() => setMode("binToDec")}
+              onChange={() => changeMode("binToDec")}
             />
             <label className="btn btn-outline-success" htmlFor="btnradio2">
               Binary to Decimal
             </label>
           </div>
         </div>
-        <div className="col-7">
+        <div className="col-6">
           <input
             className="form-control text-center"
             type="text"
             name="inputValue"
+            id="inputField"
             onChange={updateInputValue}
+            value={inputValue}
             placeholder={"0"}
           />
         </div>
-        <div className="col-2">
+        <div className="col-3">
           <button
             className="btn btn-outline-warning py-2"
             onClick={convert}
