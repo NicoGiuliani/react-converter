@@ -12,6 +12,8 @@ const Converter = (props) => {
   const changeMode = (mode) => {
     setInputValue("");
     setMode(mode);
+    props.outputCallback(0);
+    props.changeCallback(mode);
   };
 
   const validateInputValue = () => {
@@ -59,7 +61,7 @@ const Converter = (props) => {
         }
 
         const binaryOutput = binaryOutputArray.reverse().join("");
-        props.callback(binaryOutput);
+        props.outputCallback(binaryOutput);
         break;
       case "binToDec":
         const binaryValue = currentValue;
@@ -75,7 +77,7 @@ const Converter = (props) => {
               decimalValue += Math.pow(2, i);
             }
           }
-          props.callback(decimalValue);
+          props.outputCallback(decimalValue);
         }
         break;
       default:

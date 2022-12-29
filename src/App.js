@@ -5,17 +5,26 @@ import { useState } from "react";
 
 const App = () => {
   const [data, setData] = useState(0);
+  const [mode, setMode] = useState("decToBin");
 
-  const callback = (output) => {
+  const outputCallback = (output) => {
     setData(output);
   };
+
+  const changeCallback = (mode) => {
+    setMode(mode);
+  };
+
   return (
     <div className="d-flex align-items-center min-vh-100">
       <div className="container">
         <div className="row">
           <div className="col-12 text-center">
-            <Converter callback={callback} />
-            <Output outputValue={data} />
+            <Converter
+              changeCallback={changeCallback}
+              outputCallback={outputCallback}
+            />
+            <Output mode={mode} outputValue={data} />
           </div>
         </div>
       </div>

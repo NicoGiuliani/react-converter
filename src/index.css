@@ -29,7 +29,7 @@ body {
   background-size: cover;
 }
 
-@media screen and (min-device-width: 780px) {
+/* @media screen and (min-device-width: 780px) {
   .smallScreen {
     display: none !important;
   }
@@ -39,4 +39,4 @@ body {
   .bigScreen {
     display: none !important;
   }
-}
+} */
