@@ -53,31 +53,31 @@ const Converter = (props) => {
       <div className="row mb-3 bigScreen">
         <div className="col-3">
           <div
-            class="btn-group"
+            className="btn-group"
             role="group"
             aria-label="Basic radio toggle button group"
             style={{ width: "100%" }}
           >
             <input
               type="radio"
-              class="btn-check"
+              className="btn-check"
               name="btnradio"
               id="btnradio1"
-              autocomplete="off"
               checked={mode === "decToBin"}
+              onChange={() => setMode("decToBin")}
             />
-            <label class="btn btn-outline-success" for="btnradio1">
+            <label className="btn btn-outline-success" htmlFor="btnradio1">
               Decimal to Binary
             </label>
             <input
               type="radio"
-              class="btn-check"
+              className="btn-check"
               name="btnradio"
               id="btnradio2"
-              autocomplete="off"
               checked={mode === "binToDec"}
+              onChange={() => setMode("binToDec")}
             />
-            <label class="btn btn-outline-success" for="btnradio2">
+            <label className="btn btn-outline-success" htmlFor="btnradio2">
               Binary to Decimal
             </label>
           </div>
