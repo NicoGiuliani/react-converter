@@ -18,11 +18,11 @@ const Converter = (props) => {
 
   const validateInputValue = () => {
     let value;
-    let regex = /[\D]/g;
+    let regex = /[^0-9\s]/g;
     if (regex.test(inputValue)) {
       alert("Input value must be a positive integer.");
     } else {
-      value = parseInt(inputValue);
+      value = parseInt(inputValue.replace(/\s/g, ""));
       if (inputValue > 2 ** 53 - 1) {
         alert("Too large of an input provided.");
         value = 0;
