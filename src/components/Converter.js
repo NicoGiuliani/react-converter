@@ -87,78 +87,115 @@ const Converter = (props) => {
 
   return (
     <>
-      <div className="row mb-3 bigScreen">
-        <div className="col-3">
-          <div
-            className="btn-group"
-            role="group"
-            aria-label="Basic radio toggle button group"
-            style={{ width: "100%" }}
-          >
+      {/* large screen version */}
+      <form>
+        <div className="row mb-3 bigScreen">
+          <div className="col-3">
+            <div
+              className="btn-group w-100 h-100"
+              role="group"
+              aria-label="Basic radio toggle button group"
+            >
+              <input
+                type="radio"
+                className="btn-check"
+                name="btnradio"
+                id="btnradio1"
+                checked={mode === "decToBin"}
+                onChange={() => changeMode("decToBin")}
+              />
+              <label className="btn btn-outline-success" htmlFor="btnradio1">
+                Decimal to Binary
+              </label>
+              <input
+                type="radio"
+                className="btn-check"
+                name="btnradio"
+                id="btnradio2"
+                checked={mode === "binToDec"}
+                onChange={() => changeMode("binToDec")}
+              />
+              <label className="btn btn-outline-success" htmlFor="btnradio2">
+                Binary to Decimal
+              </label>
+            </div>
+          </div>
+          <div className="col-6">
             <input
-              type="radio"
-              className="btn-check"
-              name="btnradio"
-              id="btnradio1"
-              checked={mode === "decToBin"}
-              onChange={() => changeMode("decToBin")}
+              className="form-control text-center w-100 h-100"
+              type="text"
+              name="inputValue"
+              id="inputField"
+              onChange={updateInputValue}
+              value={inputValue}
+              placeholder={"0"}
             />
-            <label className="btn btn-outline-success" htmlFor="btnradio1">
-              Decimal to Binary
-            </label>
-            <input
-              type="radio"
-              className="btn-check"
-              name="btnradio"
-              id="btnradio2"
-              checked={mode === "binToDec"}
-              onChange={() => changeMode("binToDec")}
-            />
-            <label className="btn btn-outline-success" htmlFor="btnradio2">
-              Binary to Decimal
-            </label>
+          </div>
+          <div className="col-3">
+            <button
+              className="btn btn-outline-warning py-2 w-100 h-100"
+              onClick={convert}
+            >
+              <strong>Convert</strong>
+            </button>
           </div>
         </div>
-        <div className="col-6">
-          <input
-            className="form-control text-center"
-            type="text"
-            name="inputValue"
-            id="inputField"
-            onChange={updateInputValue}
-            value={inputValue}
-            placeholder={"0"}
-          />
-        </div>
-        <div className="col-3">
-          <button
-            className="btn btn-outline-warning py-2"
-            onClick={convert}
-            style={{ width: "100%" }}
-          >
-            <strong>Convert</strong>
-          </button>
-        </div>
-      </div>
+      </form>
 
-      {/* <div className="row mb-3 smallScreen mx-auto">
-        <label className="form-label pt-1" htmlFor="inputValue">
-          <strong>Enter decimal value:</strong>
-        </label>
-        <input
-          className="form-control text-center mb-3"
-          type="text"
-          name="inputValue"
-          onChange={updateInputValue}
-          // placeholder={0}
-        />
-        <button
-          className="btn btn-outline-warning px-3 py-2"
-          onClick={buttonClicked}
-        >
-          <strong>Convert</strong>
-        </button>
-      </div> */}
+      {/* Small screen version */}
+      <form>
+        <div className="row mb-3 smallScreen">
+          <div className="col-12 mt-3">
+            <div
+              className="btn-group w-100"
+              role="group"
+              aria-label="Basic radio toggle button group"
+            >
+              <input
+                type="radio"
+                className="btn-check"
+                name="btnradio"
+                id="btnradio3"
+                checked={mode === "decToBin"}
+                onChange={() => changeMode("decToBin")}
+              />
+              <label className="btn btn-outline-success" htmlFor="btnradio3">
+                Decimal to Binary
+              </label>
+              <input
+                type="radio"
+                className="btn-check"
+                name="btnradio"
+                id="btnradio4"
+                checked={mode === "binToDec"}
+                onChange={() => changeMode("binToDec")}
+              />
+              <label className="btn btn-outline-success" htmlFor="btnradio4">
+                Binary to Decimal
+              </label>
+            </div>
+          </div>
+          <div className="col-12 mt-3">
+            <input
+              className="form-control text-center w-100 h-100"
+              type="text"
+              name="inputValue"
+              id="inputField"
+              onChange={updateInputValue}
+              value={inputValue}
+              placeholder={"0"}
+            />
+          </div>
+          <div className="col-12 mt-3 ">
+            <button
+              className="btn btn-outline-warning py-2 w-100 h-100"
+              onClick={convert}
+            >
+              <strong>Convert</strong>
+            </button>
+          </div>
+        </div>
+      </form>
     </>
   );
 };

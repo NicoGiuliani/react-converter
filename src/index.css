@@ -29,14 +29,14 @@ body {
   background-size: cover;
 }
 
-/* @media screen and (min-device-width: 780px) {
-  .smallScreen {
+@media screen and (max-device-width: 775px) {
+  .bigScreen {
     display: none !important;
   }
 }
 
-@media screen and (max-device-width: 780px) {
-  .bigScreen {
+@media screen and (min-device-width: 775px) {
+  .smallScreen {
     display: none !important;
   }
-} */
+}
