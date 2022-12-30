@@ -100,7 +100,7 @@ const Converter = (props) => {
               <input
                 type="radio"
                 className="btn-check"
-                name="btnradio"
+                name="decimalToBinary"
                 id="btnradio1"
                 checked={mode === "decToBin"}
                 onChange={() => changeMode("decToBin")}
@@ -111,7 +111,7 @@ const Converter = (props) => {
               <input
                 type="radio"
                 className="btn-check"
-                name="btnradio"
+                name="binaryToDecimal"
                 id="btnradio2"
                 checked={mode === "binToDec"}
                 onChange={() => changeMode("binToDec")}
@@ -155,7 +155,7 @@ const Converter = (props) => {
               <input
                 type="radio"
                 className="btn-check"
-                name="btnradio"
+                name="decimalToBinary"
                 id="btnradio3"
                 checked={mode === "decToBin"}
                 onChange={() => changeMode("decToBin")}
@@ -166,7 +166,7 @@ const Converter = (props) => {
               <input
                 type="radio"
                 className="btn-check"
-                name="btnradio"
+                name="binaryToDecimal"
                 id="btnradio4"
                 checked={mode === "binToDec"}
                 onChange={() => changeMode("binToDec")}
