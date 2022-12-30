@@ -146,7 +146,7 @@ const Converter = (props) => {
       {/* Small screen version */}
       <form>
         <div className="row mb-3 smallScreen">
-          <div className="col-12 mt-3">
+          <div className="col-12 mt-3 w-100">
             <div
               className="btn-group w-100"
               role="group"

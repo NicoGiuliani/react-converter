@@ -29,13 +29,13 @@ body {
   background-size: cover;
 }
 
-@media screen and (max-device-width: 775px) {
+@media screen and (max-width: 775px) {
   .bigScreen {
     display: none !important;
   }
 }
 
-@media screen and (min-device-width: 775px) {
+@media screen and (min-width: 775px) {
   .smallScreen {
     display: none !important;
   }
