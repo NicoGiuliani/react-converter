@@ -31,7 +31,8 @@ const Converter = (props) => {
     return value;
   };
 
-  const convert = () => {
+  const convert = (e) => {
+    e.preventDefault();
     let currentValue = validateInputValue();
 
     switch (mode) {
