@@ -22,10 +22,14 @@ const Converter = (props) => {
     if (regex.test(inputValue)) {
       alert("Input value must be a positive integer.");
     } else {
-      value = parseInt(inputValue.replace(/\s/g, ""));
-      if (inputValue > 2 ** 53 - 1) {
-        alert("Too large of an input provided.");
-        value = 0;
+      if (mode === "decToBin") {
+        value = parseInt(inputValue.replace(/\s/g, ""));
+        if (value > 2 ** 53 - 1) {
+          alert("Too large of an input provided.");
+          value = 0;
+        }
+      } else {
+        value = inputValue.replace(/\s/g, "");
       }
     }
     return value;
@@ -65,8 +69,8 @@ const Converter = (props) => {
         props.outputCallback(binaryOutput);
         break;
       case "binToDec":
-        const binaryValue = currentValue;
-        const binaryString = binaryValue.toString();
+        const binaryString = currentValue;
+        // const binaryString = binaryValue.toString();
         const regex = /[^01]/g;
         if (regex.test(binaryString)) {
           alert("Invalid digit present in binary");

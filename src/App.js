@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <div className="d-flex align-items-center min-vh-100">
-      <div className="container">
+      <div className="container" style={{ minWidth: "190px" }}>
         <div className="row">
           <div className="col-12 text-center">
             <Converter
