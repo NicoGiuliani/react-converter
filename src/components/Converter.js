@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState, React } from "react";
 
 const Converter = (props) => {
