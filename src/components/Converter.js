@@ -23,11 +23,7 @@ const Converter = (props) => {
       alert("Input value must be a positive integer.");
     } else {
       if (mode === "decToBin") {
-        value = parseInt(inputValue.replace(/\s/g, ""));
-        if (value > 2 ** 53 - 1) {
-          alert("Too large of an input provided.");
-          value = 0;
-        }
+        value = BigInt(inputValue.replace(/\s/g, ""));
       } else {
         value = inputValue.replace(/\s/g, "");
       }
@@ -42,47 +38,49 @@ const Converter = (props) => {
     switch (mode) {
       case "decToBin":
         let decimalValue = currentValue;
-        let binaryOneIndices = [];
-        let highestIndex;
+        let binary = "";
 
         while (decimalValue > 0) {
-          highestIndex = Math.floor(Math.log(decimalValue) / Math.log(2));
-          decimalValue -= Math.pow(2, highestIndex);
-          binaryOneIndices.push(highestIndex);
-        }
-        const binaryDigitArray =
-          binaryOneIndices.length > 0
-            ? Array(binaryOneIndices[0] + 1).fill(0)
-            : [0];
-
-        binaryOneIndices.forEach((index) => (binaryDigitArray[index] = 1));
-
-        let binaryOutputArray = Array(binaryDigitArray.length);
-        for (let i = 0; i < binaryDigitArray.length; i++) {
-          if (i % 4 === 0 && i !== 0) {
-            binaryOutputArray.push(" ");
+          if (decimalValue & 1n) {
+            binary = "1" + binary;
+          } else {
+            binary = "0" + binary;
           }
-          binaryOutputArray.push(binaryDigitArray[i]);
+          decimalValue = decimalValue >> 1n;
         }
 
-        const binaryOutput = binaryOutputArray.reverse().join("");
-        props.outputCallback(binaryOutput);
+        let binaryArray = binary.split('').reverse();
+        let leadZeroes = binaryArray.length % 4;
+        for (let i = 0; i < leadZeroes; i++) {
+          binaryArray.push('0')
+        }
+      
+        let withSpaces = []
+        
+        for (let i = 0; i < binaryArray.length; i++) {
+          if (i % 4 === 0 && i !== 0) {
+            withSpaces.push(" ");
+          } 
+          withSpaces.push(binaryArray[i]);
+        }
+
+        props.outputCallback(withSpaces.reverse().join(''));
         break;
       case "binToDec":
-        const binaryString = currentValue;
-        // const binaryString = binaryValue.toString();
+        let binaryString = currentValue;
         const regex = /[^01]/g;
         if (regex.test(binaryString)) {
           alert("Invalid digit present in binary");
         } else {
-          let decimalValue = 0;
-          const reversedBinaryDigits = binaryString.split("").reverse();
-          for (let i = 0; i < reversedBinaryDigits.length; i++) {
-            if (reversedBinaryDigits[i] === "1") {
-              decimalValue += Math.pow(2, i);
+          let decimalValue = 0n;
+          const binaryArray = binaryString.split('').reverse();
+
+          for (let i = 0; i < binaryArray.length; i++) {    
+            if (binaryArray[i] === '1') {
+              decimalValue = decimalValue + BigInt(2 ** i)
             }
           }
-          props.outputCallback(decimalValue);
+          props.outputCallback(decimalValue.toString());
         }
         break;
       default:
