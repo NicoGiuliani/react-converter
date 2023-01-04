@@ -50,22 +50,20 @@ const Converter = (props) => {
           decimalValue = decimalValue >> 1n;
         }
 
-        let binaryArray = binary.split('').reverse();
-        let leadZeroes = binaryArray.length % 4;
-        for (let i = 0; i < leadZeroes; i++) {
-          binaryArray.push('0')
+        let binaryArray = binary.split("").reverse();
+        while (binaryArray.length % 4 !== 0) {
+          binaryArray.push("0");
         }
-      
-        let withSpaces = []
-        
+
+        let withSpaces = [];
         for (let i = 0; i < binaryArray.length; i++) {
           if (i % 4 === 0 && i !== 0) {
             withSpaces.push(" ");
-          } 
+          }
           withSpaces.push(binaryArray[i]);
         }
 
-        props.outputCallback(withSpaces.reverse().join(''));
+        props.outputCallback(withSpaces.reverse().join(""));
         break;
       case "binToDec":
         let binaryString = currentValue;
@@ -74,11 +72,11 @@ const Converter = (props) => {
           alert("Invalid digit present in binary");
         } else {
           let decimalValue = 0n;
-          const binaryArray = binaryString.split('').reverse();
+          const binaryArray = binaryString.split("").reverse();
 
-          for (let i = 0; i < binaryArray.length; i++) {    
-            if (binaryArray[i] === '1') {
-              decimalValue = decimalValue + BigInt(2 ** i)
+          for (let i = 0; i < binaryArray.length; i++) {
+            if (binaryArray[i] === "1") {
+              decimalValue = decimalValue + BigInt(2 ** i);
             }
           }
           props.outputCallback(decimalValue.toString());
